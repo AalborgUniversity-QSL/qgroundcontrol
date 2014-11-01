@@ -57,6 +57,8 @@ GeneratedFiles/
 
 *.autosave
 .settings/
+*.sublime-project
+*.sublime-workspace
 
 # Generated files
 moc_*
