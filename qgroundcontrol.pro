@@ -495,6 +495,7 @@ HEADERS += \
     src/uas/QGCUASWorker.h \
     src/CmdLineOptParser.h \
     src/uas/QGXPX4UAS.h
+    src/uas/QuadFormation.h
 
 SOURCES += \
     src/main.cc \
@@ -648,6 +649,7 @@ SOURCES += \
     src/uas/QGCUASWorker.cc \
     src/CmdLineOptParser.cc \
     src/uas/QGXPX4UAS.cc
+    src/uas/QuadFormation.cc
 
 #
 # Unit Test specific configuration goes here
