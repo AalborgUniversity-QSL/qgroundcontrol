@@ -67,6 +67,19 @@ UASInterface* QGCMAVLinkUASFactory::createUAS(MAVLinkProtocol* mavlink, LinkInte
         uas = px4;
     }
     break;
+    case MAV_AUTOPILOT_QUAD_FORMATION:
+    {
+        QuadFormation* n = new QuadFormation(mavlink, worker, sysid);
+        // set the system type
+        n->setSystemType((int)heartbeat->type);
+
+        // Connect the Quad to the UAS object
+        // it is important here to use the right object type.
+        // else the slot of the parent object is called
+        connect(mavlink, SIGNAL(messageReceived(LinkInterface*, mavlink_message_t)), n, SLOT(receiveMessage(LinkInterface*, mavlink_message_t)));
+        uas = n;
+    }
+    break;
     default:
     {
         UAS* mav = new UAS(mavlink, worker, sysid);
