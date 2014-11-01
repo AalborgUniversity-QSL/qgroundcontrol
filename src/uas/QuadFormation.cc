@@ -13,6 +13,7 @@ QuadFormation::QuadFormation(MAVLinkProtocol* mavlink, QThread* thread, int id) 
  *             messages can be sent back to the system via this link
  * @param message MAVLink message, as received from the MAVLink protocol stack
  */
+ 
 void QuadFormation::receiveMessage(LinkInterface* link, mavlink_message_t message)
 {
     UAS::receiveMessage(link, message);

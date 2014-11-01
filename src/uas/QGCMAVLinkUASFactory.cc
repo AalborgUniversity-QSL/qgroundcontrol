@@ -2,6 +2,7 @@
 #include "UASManager.h"
 #include "QGCUASWorker.h"
 #include "QGXPX4UAS.h"
+#include "QuadFormation.h"
 
 QGCMAVLinkUASFactory::QGCMAVLinkUASFactory(QObject *parent) :
     QObject(parent)
@@ -70,12 +71,13 @@ UASInterface* QGCMAVLinkUASFactory::createUAS(MAVLinkProtocol* mavlink, LinkInte
     case MAV_AUTOPILOT_QUAD_FORMATION:
     {
         QuadFormation* n = new QuadFormation(mavlink, worker, sysid);
-        // set the system type
+        // Set the system type
         n->setSystemType((int)heartbeat->type);
 
-        // Connect the Quad to the UAS object
-        // it is important here to use the right object type.
-        // else the slot of the parent object is called
+        // Connect this robot to the UAS object
+        // it is IMPORTANT here to use the right object type,
+        // else the slot of the parent object is called (and thus the special
+        // packets never reach their goal)
         connect(mavlink, SIGNAL(messageReceived(LinkInterface*, mavlink_message_t)), n, SLOT(receiveMessage(LinkInterface*, mavlink_message_t)));
         uas = n;
     }
